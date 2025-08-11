@@ -307,61 +307,150 @@
         /* Card Styling */
         .card-container .MuiBox-root,
         .social-media-cards .card {
-            background: linear-gradient(135deg, rgba(39, 117, 202, 0.1) 0%, rgba(211, 47, 47, 0.1) 100%);
-            border: 2px solid transparent;
-            border-image: linear-gradient(45deg, var(--spidey-blue), var(--spidey-red)) 1;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            /* Updated background with stronger gradient and subtle web pattern */
+            background:
+                linear-gradient(135deg, var(--spidey-blue) 0%, var(--spidey-red) 100%),
+                url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="web-card-pattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M-5,15 l10,-10 M-5,15 l10,10 M15,5 l-10,10 M15,5 l10,-10 M15,-5 l10,10 M-10,15 l10,-10 M15,35 l10,-10" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-linecap="square"></path></pattern></defs><rect width="100%" height="100%" fill="url(%23web-card-pattern)"></rect></svg>');
+            background-blend-mode: overlay; /* Blend the gradient and pattern */
+            border: 3px solid transparent; /* Prepare for border-image */
+            border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue), var(--spidey-red)) 1; /* Animated border */
+            border-radius: 15px; /* Slightly more rounded corners */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Stronger initial shadow */
+            transition: all 0.4s ease-in-out;
+            position: relative;
+            overflow: hidden; /* To contain pseudo-elements like glow */
+            animation: cardBorderPulse 4s infinite alternate, fadeInUp 1s ease-out forwards; /* Initial entrance and pulsing border */
+        }
+
+        @keyframes cardBorderPulse {
+            0% { border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue)) 1; }
+            50% { border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-accent-yellow)) 1; }
+            100% { border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue)) 1; }
         }
 
         .card-container .MuiBox-root:hover,
         .social-media-cards .card:hover {
-            transform: translateY(-7px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(211, 47, 47, 0.6), 0 0 25px rgba(39, 117, 202, 0.6);
-            border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue)) 1;
+            transform: translateY(-10px) scale(1.03); /* More pronounced lift and scale */
+            box-shadow:
+                0 20px 50px rgba(211, 47, 47, 0.8), /* Stronger red glow */
+                0 0 40px rgba(39, 117, 202, 0.8), /* Stronger blue glow */
+                0 0 60px rgba(251, 192, 45, 0.5); /* Accent yellow glow */
+            border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue), var(--spidey-accent-yellow)) 1;
         }
 
-        .code-container .code { /* Style for KCAZ code */
+        /* "Code KCAZ" and Arrows */
+        .code-container .code {
             font-family: 'Bangers', cursive;
             color: var(--spidey-accent-yellow);
-            font-size: 30px !important;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            font-size: clamp(28px, 6vw, 40px) !important; /* Larger and responsive font size */
+            text-shadow:
+                2px 2px 0px var(--spidey-red),
+                4px 4px 0px var(--spidey-blue),
+                6px 6px 3px rgba(0, 0, 0, 0.7);
+            letter-spacing: 3px;
+            transition: all 0.3s ease-in-out;
+            display: inline-block; /* Required for transform */
+        }
+
+        .code-container .code:hover {
+            transform: scale(1.1);
+            color: white;
+            text-shadow:
+                2px 2px 0px var(--spidey-blue),
+                4px 4px 0px var(--spidey-red),
+                6px 6px 5px rgba(0, 0, 0, 0.9);
+        }
+
+        .code-container svg {
+            color: var(--spidey-accent-yellow);
+            animation: arrowPulse 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes arrowPulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
 
         /* Buttons */
         .MuiButton-containedPrimary.signup-button {
-            background: linear-gradient(90deg, var(--spidey-red) 0%, var(--spidey-accent-yellow) 100%);
+            background: linear-gradient(90deg, var(--spidey-accent-yellow) 0%, var(--spidey-red) 50%, var(--spidey-blue) 100%);
             color: white;
             font-weight: bold;
             text-transform: uppercase;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            font-family: 'Bangers', cursive; /* Apply Bangers font */
+            letter-spacing: 1px;
+            border-radius: 10px; /* Slightly more rounded */
+            border: 3px solid var(--spidey-accent-yellow); /* Stronger border */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Stronger initial shadow */
+            transition: all 0.4s ease-in-out, background 0.8s ease; /* Longer background transition */
             position: relative;
             overflow: hidden;
+            z-index: 1; /* For pseudo-element stacking */
         }
 
+        /* Light sweep effect on buttons */
         .MuiButton-containedPrimary.signup-button:before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: -150%; /* Start further left */
+            width: 200%; /* Wider sweep */
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: all 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); /* Brighter sweep */
+            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smoother and slightly faster */
             transform: skewX(-20deg);
+            z-index: -1; /* Behind button text */
         }
 
         .MuiButton-containedPrimary.signup-button:hover:before {
-            left: 100%;
+            left: 150%; /* Sweep further right */
         }
 
         .MuiButton-containedPrimary.signup-button:hover {
-            background: linear-gradient(90deg, var(--spidey-blue) 0%, var(--spidey-red) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(90deg, var(--spidey-blue) 0%, var(--spidey-accent-yellow) 50%, var(--spidey-red) 100%);
+            transform: translateY(-5px) scale(1.02); /* More pronounced lift */
+            box-shadow:
+                0 10px 25px rgba(211, 47, 47, 0.7),
+                0 0 20px rgba(39, 117, 202, 0.7),
+                0 0 30px rgba(251, 192, 45, 0.4); /* Multi-color shadow on hover */
+            border-color: white; /* Border color changes on hover */
+        }
+
+        /* For the $600 display (price-wrapper.glow) */
+        .toggle-images .label .price-wrapper.glow {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5em, 8vw, 6em); /* Responsive font size */
+            color: var(--spidey-accent-yellow);
+            text-shadow:
+                4px 4px 0px var(--spidey-red),
+                8px 8px 0px var(--spidey-blue),
+                12px 12px 5px rgba(0, 0, 0, 0.7); /* Layered shadows */
+            animation: spideyTextPulse 2s infinite alternate ease-in-out, textEntrance 1s forwards; /* New animations */
+            transform: scale(1); /* Initial state for animation */
+            display: inline-block; /* Required for transform on inline elements */
+            letter-spacing: 2px;
+            line-height: 1; /* Adjust line height if needed */
+        }
+
+        @keyframes spideyTextPulse {
+            0% {
+                text-shadow: 4px 4px 0px var(--spidey-red), 8px 8px 0px var(--spidey-blue), 12px 12px 5px rgba(0, 0, 0, 0.7);
+                transform: scale(1);
+            }
+            50% {
+                text-shadow: 6px 6px 0px var(--spidey-blue), 12px 12px 0px var(--spidey-red), 18px 18px 8px rgba(0, 0, 0, 0.9);
+                transform: scale(1.05);
+            }
+            100% {
+                text-shadow: 4px 4px 0px var(--spidey-red), 8px 8px 0px var(--spidey-blue), 12px 12px 5px rgba(0, 0, 0, 0.7);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes textEntrance {
+            from { opacity: 0; transform: translateY(20px) scale(0.8); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Footer styling */
@@ -454,7 +543,7 @@
                 <div class="image-wrapper">
                     <img class="game-image clash-image" id="clashImage2" src="/assets/rainbet.png" style="cursor: pointer;opacity: 1;" onclick="window.location.href='/leaderboard/rainbet'">
                     <div class="label">
-                        <div data-v-1d580398="" class="price-wrapper glow" style="font-size: 26px;">
+                        <div data-v-1d580398="" class="price-wrapper glow">
                             $ 600
                         </div>
                     </div>
@@ -473,8 +562,8 @@
                             <path d="M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"></path>
                             <path d="m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"></path>
                         </svg>
-                        <p class="MuiTypography-root MuiTypography-body1 css-8a8e2m-MuiTypography-root" style="font-size: 24px;">Code</p>
-                        <p class="MuiTypography-root MuiTypography-body1 code css-rmwyl-MuiTypography-root">KCAZ</p>
+                        <p class="MuiTypography-root MuiTypography-body1 css-8a8e2m-MuiTypography-root">Code</p>
+                        <p class="MuiTypography-root MuiTypography-body1 code">KCAZ</p>
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1m8kjhh" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="KeyboardDoubleArrowLeftIcon">
                             <path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path>
                             <path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path>
