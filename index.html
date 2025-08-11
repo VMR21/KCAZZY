@@ -15,43 +15,8 @@
     <link rel="stylesheet" type="text/css" href="/css/toast.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- SPIDER-MAN THEME STYLES START -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     <style>
-        /* General Spider-Man Theme Variables */
-        :root {
-            --spidey-red: #d32f2f; /* Classic Red */
-            --spidey-blue: #2775ca; /* Classic Blue */
-            --spidey-dark-bg: #0d1117; /* Even darker background for contrast */
-            --spidey-accent-yellow: #fbc02d; /* For highlights, like eyes or special glows */
-            --web-color-subtle: rgba(255, 255, 255, 0.03); /* Very subtle web lines */
-            --text-color: #e0e0e0; /* Light grey for general text */
-        }
-
-        /* --- Global Reset for Outlines --- */
-        *:focus {
-            outline: none !important; /* Remove all default browser outlines */
-            box-shadow: 0 0 0 2px var(--spidey-accent-yellow), 0 0 0 4px var(--spidey-blue) !important; /* Custom focus ring */
-            transition: box-shadow 0.2s ease-in-out;
-        }
-
-        body {
-            background-color: var(--spidey-dark-bg);
-            /* Subtle web pattern with radial gradients for depth */
-            background-image:
-                radial-gradient(circle at 10% 20%, var(--web-color-subtle) 1px, transparent 1px),
-                radial-gradient(circle at 90% 80%, var(--web-color-subtle) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, var(--web-color-subtle) 1px, transparent 1px),
-                linear-gradient(to right, var(--web-color-subtle) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--web-color-subtle) 1px, transparent 1px);
-            background-size: 40px 40px; /* Adjust for density */
-            color: var(--text-color); /* Apply text color globally */
-            font-family: 'Inter', sans-serif; /* Default text font */
-            text-shadow: 0 0 1px var(--spidey-blue); /* Subtle shadow for all text */
-        }
-
-        /* Original styles for draggable etc., updated to use variables */
         .draggable {
             position: fixed;
             bottom: 15px;
@@ -62,36 +27,36 @@
             border-radius: 8px;
             overflow: hidden;
             z-index: 1000;
-            background: var(--spidey-dark-bg); /* Use dark background */
-            border: 2px solid var(--spidey-red); /* Spidey red border */
-            box-shadow: 0 0 50px var(--spidey-blue); /* Blue glow */
+            background: white;
+            border: 2px solid #2775ca;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
         }
         .controls {
             display: flex;
             align-items: center;
-            background-color: var(--spidey-dark-bg);
+            background-color: #333;
             padding: 5px;
-            cursor: grab; /* More indicative cursor */
+            cursor: move;
         }
         .drag-handle {
             flex-grow: 1;
             text-align: left;
-            color: var(--spidey-accent-yellow); /* Yellow for drag handle */
+            color: #2775ca;
             font-size: 20px;
             font-weight: 900;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
             padding: 0 15px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
         }
         .close-btn {
             cursor: pointer;
             background: none;
             border: none;
-            color: var(--spidey-accent-yellow); /* Yellow for close button */
+            color: #2775ca;
             font-size: 20px;
             font-weight: 900;
             line-height: 30px;
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
             padding: 0 20px;
-            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
         }
         iframe {
             width: 100%;
@@ -108,22 +73,25 @@
             width: 50px;
             height: 50px;
             border-radius: 25px;
-            background-color: var(--spidey-blue); /* Blue background for minimized icon */
+            /* Makes it round */
+            background-color: #333;
             color: white;
             font-size: 30px;
             z-index: 1001;
+            /* Should be above the draggable player */
             cursor: pointer;
-            box-shadow: 0 0 100px var(--spidey-red); /* Red glow for minimized icon */
+            box-shadow: 0 0 100px rgba(39, 117, 202, 1);
         }
         .open-btn {
             background: none;
             border: none;
-            color: var(--spidey-accent-yellow);
+            color: #2775ca;
             font-size: 20px;
             font-weight: 900;
             cursor: pointer;
         }
         @media (max-width: 570px) {
+            /* center the player on mobile */
             .draggable {
                 left: 50%;
                 transform: translateX(-50%);
@@ -150,24 +118,37 @@
         }
         .code-description-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(var(--spidey-blue), 0.5); /* Use spidey blue */
+            box-shadow: 0 15px 30px rgba(39, 117, 202, 0.5);
         }
         @keyframes float {
-            0% { transform: translateY(0px) scaleX(1) rotate(20deg); }
-            50% { transform: translateY(-10px) scaleX(1) rotate(20deg); }
-            100% { transform: translateY(0px) scaleX(1) rotate(20deg); }
+            0% {
+                transform: translateY(0px) scaleX(1) rotate(20deg);
+            }
+            50% {
+                transform: translateY(-10px) scaleX(1) rotate(20deg);
+            }
+            100% {
+                transform: translateY(0px) scaleX(1) rotate(20deg);
+            }
         }
         @keyframes floatLeft {
-            0% { transform: translateY(0px) scaleX(-1) rotate(20deg); }
-            50% { transform: translateY(-10px) scaleX(-1) rotate(20deg); }
-            100% { transform: translateY(0px) scaleX(-1) rotate(20deg); }
+            0% {
+                transform: translateY(0px) scaleX(-1) rotate(20deg);
+            }
+            50% {
+                transform: translateY(-10px) scaleX(-1) rotate(20deg);
+            }
+            100% {
+                transform: translateY(0px) scaleX(-1) rotate(20deg);
+            }
         }
         .coin-container {
             position: relative;
             height: 0;
             margin: 0;
         }
-        .coin-left, .coin-right {
+        .coin-left,
+        .coin-right {
             position: absolute;
             height: 100px;
             width: auto;
@@ -187,325 +168,81 @@
                 display: none;
             }
         }
+    </style>
 
-        /* Header and Navigation */
-        header {
-            background: linear-gradient(90deg, var(--spidey-blue) 0%, var(--spidey-red) 100%);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            border-bottom: 2px solid var(--spidey-accent-yellow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+    <style>
+        :root {
+            --spidey-blue: #2775ca;
+            --spidey-red: #d32f2f;
+            --spidey-dark: #121212;
+            --spidey-web-pattern: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="web-pattern" patternUnits="userSpaceOnUse" width="40" height="40"><path d="M-10,20 l20,-20 M-10,20 l20,20 M20,10 l-20,20 M20,10 l20,-20 M20,-10 l20,20 M-20,20 l20,-20 M20,50 l20,-20" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="square"></path></pattern></defs><rect width="100%" height="100%" fill="url(%23web-pattern)"></rect></svg>');
         }
-
+        body {
+            background-color: var(--spidey-dark);
+            background-image: var(--spidey-web-pattern);
+            background-repeat: repeat;
+        }
+        header {
+            background: linear-gradient(90deg, rgba(39, 117, 202, 0.2) 0%, rgba(211, 47, 47, 0.2) 100%);
+            border-bottom: 2px solid var(--spidey-red);
+        }
+        .title {
+            font-family: 'Bangers', cursive;
+            color: var(--spidey-red) !important;
+            text-shadow: 2px 2px 5px var(--spidey-blue);
+            transition: all 0.3s ease;
+        }
+        .title:hover {
+            transform: scale(1.05);
+            text-shadow: 4px 4px 10px var(--spidey-blue);
+        }
+        .glow {
+            animation: spideyGlow 3s infinite alternate;
+        }
+        @keyframes spideyGlow {
+            from {
+                box-shadow: 0 0 20px rgba(39, 117, 202, 0.7);
+            }
+            to {
+                box-shadow: 0 0 20px rgba(211, 47, 47, 0.7);
+            }
+        }
+        .code-container svg {
+            color: var(--spidey-red);
+        }
+        .MuiButton-containedPrimary.signup-button {
+            background-color: var(--spidey-red);
+            transition: background-color 0.3s ease;
+        }
+        .MuiButton-containedPrimary.signup-button:hover {
+            background-color: var(--spidey-blue);
+        }
+        .social-media-cards .card:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 15px rgba(211, 47, 47, 0.5);
+        }
+        .footer-socials a.social:hover {
+            transform: translateX(4px) scale(1.1);
+        }
         .logo-title {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
-
-        .logo {
-            border-radius: 50%;
-            border: 2px solid var(--spidey-accent-yellow);
-            box-shadow: 0 0 10px var(--spidey-accent-yellow);
-        }
-
-        .title {
-            font-family: 'Bangers', cursive;
-            color: white !important;
-            text-shadow: 3px 3px 7px var(--spidey-dark-bg);
-            font-size: 2.5em;
-            letter-spacing: 2px;
-            transition: all 0.4s ease-in-out;
-        }
-
-        .title:hover {
-            transform: scale(1.08) translateY(-3px);
-            color: var(--spidey-accent-yellow) !important;
-            text-shadow: 5px 5px 15px var(--spidey-blue);
-        }
-
-        .spider-logo {
-            height: 45px;
-            width: 45px;
+        .spider-emblem {
+            height: 35px;
             margin-left: 15px;
-            fill: white;
-            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
-            animation: spiderPulse 3s infinite alternate, spiderSpin 8s linear infinite;
-            transition: all 0.3s ease;
+            animation: spin 5s linear infinite;
         }
-
-        .spider-logo:hover {
-            transform: scale(1.1) rotate(10deg);
-            filter: drop-shadow(0 0 15px var(--spidey-accent-yellow));
-        }
-
-        @keyframes spiderPulse {
-            0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--spidey-blue)); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px var(--spidey-red)); }
-            100% { transform: scale(1); filter: drop-shadow(0 0 5px var(--spidey-blue)); }
-        }
-
-        @keyframes spiderSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .nav-links li a {
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: color 0.3s ease, transform 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 5px;
-            outline: none; /* Ensure no outline */
-        }
-
-        .nav-links li a:hover {
-            color: var(--spidey-accent-yellow);
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px) scale(1.05);
-        }
-
-        /* Main Content Enhancements */
-        #appContent {
-            position: relative;
-            border: 3px solid transparent; /* Changed from border-image to solid for custom animation */
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 50px;
-            box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
-            animation: contentBorderGlow 4s infinite alternate;
-            background-color: rgba(18, 18, 18, 0.8); /* Slightly transparent background for content */
-        }
-
-        @keyframes contentBorderGlow {
-            0% {
-                border-color: var(--spidey-red);
-                box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
             }
-            50% {
-                border-color: var(--spidey-blue);
-                box-shadow: 0 0 45px rgba(var(--spidey-blue), 0.7), 0 0 20px rgba(var(--spidey-red), 0.7);
-            }
-            100% {
-                border-color: var(--spidey-red);
-                box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
+            to {
+                transform: rotate(360deg);
             }
         }
-
-        .row.text > .title { /* Target the direct child span with class title */
-            font-size: 2.8em;
-            color: var(--spidey-red) !important;
-            text-shadow: 4px 4px 8px var(--spidey-blue);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px dashed var(--spidey-blue);
-            animation: textWave 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes textWave {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Card Styling */
-        .card-container .MuiBox-root,
-        .social-media-cards .card {
-            background:
-                linear-gradient(135deg, var(--spidey-dark-bg) 0%, rgba(39, 117, 202, 0.2) 50%, rgba(211, 47, 47, 0.2) 100%),
-                url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="web-card-pattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M-5,15 l10,-10 M-5,15 l10,10 M15,5 l-10,10 M15,5 l10,-10 M15,-5 l10,10 M-10,15 l10,-10 M15,35 l10,-10" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-linecap="square"></path></pattern></defs><rect width="100%" height="100%" fill="url(%23web-card-pattern)"></rect></svg>');
-            background-blend-mode: overlay;
-            border: 3px solid transparent; /* Default to transparent, use pulsing border */
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            transition: all 0.4s ease-in-out;
-            position: relative;
-            overflow: hidden;
-            animation: cardBorderPulse 4s infinite alternate, fadeInUp 1s ease-out forwards;
-        }
-
-        @keyframes cardBorderPulse {
-            0% { border-color: var(--spidey-accent-yellow); }
-            25% { border-color: var(--spidey-blue); }
-            50% { border-color: var(--spidey-red); }
-            75% { border-color: var(--spidey-blue); }
-            100% { border-color: var(--spidey-accent-yellow); }
-        }
-
-        .card-container .MuiBox-root:hover,
-        .social-media-cards .card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow:
-                0 20px 50px rgba(211, 47, 47, 0.8),
-                0 0 40px rgba(39, 117, 202, 0.8),
-                0 0 60px rgba(251, 192, 45, 0.5);
-            border-color: white; /* Make border white on hover for a striking effect */
-        }
-
-        /* "Code KCAZ" and Arrows */
-        .code-container .code {
-            font-family: 'Bangers', cursive;
-            color: var(--spidey-accent-yellow);
-            font-size: clamp(28px, 6vw, 40px) !important;
-            text-shadow:
-                2px 2px 0px var(--spidey-red),
-                4px 4px 0px var(--spidey-blue),
-                6px 6px 3px rgba(0, 0, 0, 0.7);
-            letter-spacing: 3px;
-            transition: all 0.3s ease-in-out;
-            display: inline-block;
-        }
-
-        .code-container .code:hover {
-            transform: scale(1.1);
-            color: white;
-            text-shadow:
-                2px 2px 0px var(--spidey-blue),
-                4px 4px 0px var(--spidey-red),
-                6px 6px 5px rgba(0, 0, 0, 0.9);
-        }
-
-        .code-container svg {
-            color: var(--spidey-accent-yellow);
-            animation: arrowPulse 1.5s infinite alternate ease-in-out;
-        }
-
-        @keyframes arrowPulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-
-        /* Buttons */
-        .MuiButton-containedPrimary.signup-button {
-            background: linear-gradient(90deg, var(--spidey-accent-yellow) 0%, var(--spidey-red) 50%, var(--spidey-blue) 100%);
-            color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-family: 'Bangers', cursive;
-            letter-spacing: 1px;
-            border-radius: 10px;
-            border: 3px solid var(--spidey-accent-yellow);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.4s ease-in-out, background 0.8s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            outline: none; /* Ensure no outline on buttons */
-        }
-
-        /* Light sweep effect on buttons */
-        .MuiButton-containedPrimary.signup-button:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
-            transform: skewX(-20deg);
-            z-index: -1;
-        }
-
-        .MuiButton-containedPrimary.signup-button:hover:before {
-            left: 150%;
-        }
-
-        .MuiButton-containedPrimary.signup-button:hover {
-            background: linear-gradient(90deg, var(--spidey-blue) 0%, var(--spidey-accent-yellow) 50%, var(--spidey-red) 100%);
-            transform: translateY(-5px) scale(1.02);
-            box-shadow:
-                0 10px 25px rgba(211, 47, 47, 0.7),
-                0 0 20px rgba(39, 117, 202, 0.7),
-                0 0 30px rgba(251, 192, 45, 0.4);
-            border-color: white; /* Border color changes on hover */
-        }
-
-        /* For the $600 display (price-wrapper.glow) */
-        .toggle-images .label .price-wrapper.glow {
-            font-family: 'Bangers', cursive;
-            font-size: clamp(3em, 10vw, 7em); /* Even larger and more responsive */
-            color: var(--spidey-accent-yellow);
-            text-shadow:
-                5px 5px 0px var(--spidey-red),
-                10px 10px 0px var(--spidey-blue),
-                15px 15px 8px rgba(0, 0, 0, 0.8); /* More impactful layered shadows */
-            animation: spideyTextPulse 2s infinite alternate ease-in-out, textEntrance 1s forwards;
-            transform: scale(1);
-            display: inline-block;
-            letter-spacing: 3px; /* Slightly wider spacing */
-            line-height: 1;
-            white-space: nowrap; /* Prevent breaking if space is tight */
-        }
-
-        @keyframes spideyTextPulse {
-            0% {
-                text-shadow: 5px 5px 0px var(--spidey-red), 10px 10px 0px var(--spidey-blue), 15px 15px 8px rgba(0, 0, 0, 0.8);
-                transform: scale(1);
-            }
-            50% {
-                text-shadow: 7px 7px 0px var(--spidey-blue), 14px 14px 0px var(--spidey-red), 21px 21px 10px rgba(0, 0, 0, 0.9);
-                transform: scale(1.05);
-            }
-            100% {
-                text-shadow: 5px 5px 0px var(--spidey-red), 10px 10px 0px var(--spidey-blue), 15px 15px 8px rgba(0, 0, 0, 0.8);
-                transform: scale(1);
-            }
-        }
-
-        @keyframes textEntrance {
-            from { opacity: 0; transform: translateY(30px) scale(0.7); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Footer styling */
-        .inner-footer {
-            background: linear-gradient(90deg, rgba(39, 117, 202, 0.15) 0%, rgba(211, 47, 47, 0.15) 100%); /* Slightly stronger footer background */
-            border-top: 2px solid var(--spidey-blue);
-            padding-top: 30px;
-            margin-top: 50px;
-        }
-
-        .inner-footer .title {
-            font-family: 'Bangers', cursive;
-            color: var(--spidey-red);
-            text-shadow: 1px 1px 3px var(--spidey-blue);
-            font-size: 1.5em;
-        }
-
-        .inner-footer a, .inner-footer span.subtitle {
-            color: var(--text-color);
-            transition: color 0.3s ease;
-        }
-
-        .inner-footer a:hover {
-            color: var(--spidey-accent-yellow);
-        }
-
-        /* Animated Glow Containers (existing ones) */
-        .glow-container .left-glow,
-        .glow-container .right-glow {
-            animation: spideyBackgroundGlow 5s infinite alternate;
-        }
-
-        @keyframes spideyBackgroundGlow {
-            0% { box-shadow: 0 0 100px 50px rgba(39, 117, 202, 0.7); }
-            50% { box-shadow: 0 0 120px 60px rgba(211, 47, 47, 0.7); }
-            100% { box-shadow: 0 0 100px 50px rgba(39, 117, 202, 0.7); }
-        }
-
-        /* Ensure existing styles are respected or overridden properly */
-        .toggle-images .label .price-wrapper.glow {
-             animation: spideyGlow 3s infinite alternate, spideyTextPulse 2s infinite alternate ease-in-out; /* Combined animations */
-        }
-        /* Removed redundant spideyGlow from .price-wrapper.glow, as spideyTextPulse handles text-shadow effectively. */
     </style>
-    <!-- SPIDER-MAN THEME STYLES END -->
-
-</head>
+    </head>
 <body>
     <div id="toast">
         <span id="message"></span>
@@ -530,10 +267,7 @@
             <div class="logo-title">
                 <img src="/assets/logo1.png" alt="Site logo" class="logo">
                 <h1 class="title">Kcazzy</h1>
-                <!-- Spider-Man Logo designed with CSS -->
-                <svg class="spider-logo" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C8.68629 2 6 4.68629 6 8V12H2V14H6V18C6 21.3137 8.68629 24 12 24C15.3137 24 18 21.3137 18 18V14H22V12H18V8C18 4.68629 15.3137 2 12 2ZM10 8C10 5.79086 10.9403 4 12 4C13.0597 4 14 5.79086 14 8V12H10V8ZM14 14H10V18C10 20.2091 10.9403 22 12 22C13.0597 22 14 20.2091 14 18V14Z" />
-                </svg>
+                <img src="https://www.pngall.com/wp-content/uploads/5/Spider-Man-Logo-PNG-Image.png" alt="Spider-Man Logo" class="spider-emblem">
             </div>
             <ul class="nav-links">
                 <li><a href="/leaderboard/rainbet">LEADERBOARD</a></li>
@@ -548,7 +282,7 @@
                 <div class="image-wrapper">
                     <img class="game-image clash-image" id="clashImage2" src="/assets/rainbet.png" style="cursor: pointer;opacity: 1;" onclick="window.location.href='/leaderboard/rainbet'">
                     <div class="label">
-                        <div data-v-1d580398="" class="price-wrapper glow">
+                        <div data-v-1d580398="" class="price-wrapper glow" style="font-size: 26px;">
                             $ 600
                         </div>
                     </div>
@@ -567,8 +301,8 @@
                             <path d="M6.41 6 5 7.41 9.58 12 5 16.59 6.41 18l6-6z"></path>
                             <path d="m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"></path>
                         </svg>
-                        <p class="MuiTypography-root MuiTypography-body1 css-8a8e2m-MuiTypography-root">Code</p>
-                        <p class="MuiTypography-root MuiTypography-body1 code">KCAZ</p>
+                        <p class="MuiTypography-root MuiTypography-body1 css-8a8e2m-MuiTypography-root" style="font-size: 24px;">Code</p>
+                        <p class="MuiTypography-root MuiTypography-body1 code css-rmwyl-MuiTypography-root">KCAZ</p>
                         <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1m8kjhh" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="KeyboardDoubleArrowLeftIcon">
                             <path d="M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"></path>
                             <path d="m11 18 1.41-1.41L7.83 12l4.58-4.59L11 6l-6 6z"></path>
@@ -715,7 +449,7 @@
             </div>
         </div>
     </div>
-    <script src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" xintegrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f5c327eff14c77","version":"2025.4.0-1-g37f21b1","r":1,"token":"6a289e34095c4e319f5a765107c772ad","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"93f5c327eff14c77","version":"2025.4.0-1-g37f21b1","r":1,"token":"6a289e34095c4e319f5a765107c772ad","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
 </body>
 <script src="/js/app.js"></script>
 <script src="/js/particles.js"></script>
@@ -726,42 +460,37 @@
         var dragHandle = document.getElementById('drag-handle');
         var closeBtn = document.getElementById('close-btn');
 
-        // Check if elements exist before attaching events
-        if (dragHandle) {
-            dragHandle.onmousedown = function (event) {
-                event.preventDefault();
-                var startX = event.clientX - player.offsetLeft;
-                var startY = event.clientY - player.offsetTop;
+        dragHandle.onmousedown = function (event) {
+            event.preventDefault();
+            var startX = event.clientX - player.offsetLeft;
+            var startY = event.clientY - player.offsetTop;
 
-                function onMouseMove(event) {
-                    player.style.left = event.clientX - startX + 'px';
-                    player.style.top = event.clientY - startY + 'px';
-                }
+            function onMouseMove(event) {
+                player.style.left = event.clientX - startX + 'px';
+                player.style.top = event.clientY - startY + 'px';
+            }
 
-                document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mousemove', onMouseMove);
 
-                document.onmouseup = function () {
-                    document.removeEventListener('mousemove', onMouseMove);
-                };
+            document.onmouseup = function () {
+                document.removeEventListener('mousemove', onMouseMove);
             };
-        }
+        };
 
         var minimizedIcon = document.getElementById('minimized-icon');
         var openBtn = document.getElementById('open-btn');
 
         // Hide the player and show the minimized icon when close button is clicked
-        if (closeBtn) {
-            closeBtn.onclick = function () {
-                if (player) player.style.display = 'none';
-                if (minimizedIcon) minimizedIcon.style.display = 'flex';
-            };
-        }
+        closeBtn.onclick = function () {
+            player.style.display = 'none';
+            if (minimizedIcon) minimizedIcon.style.display = 'flex'; // Check if minimizedIcon exists
+        };
 
         // Add click event to the minimized icon to show the player again
         if (openBtn) {
             openBtn.onclick = function () {
-                if (player) player.style.display = 'block';
-                if (minimizedIcon) minimizedIcon.style.display = 'none';
+                player.style.display = 'block';
+                if (minimizedIcon) minimizedIcon.style.display = 'none'; // Check if minimizedIcon exists
             };
         }
     };
