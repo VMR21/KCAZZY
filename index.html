@@ -23,10 +23,17 @@
         :root {
             --spidey-red: #d32f2f; /* Classic Red */
             --spidey-blue: #2775ca; /* Classic Blue */
-            --spidey-dark-bg: #121212; /* Very dark background */
+            --spidey-dark-bg: #0d1117; /* Even darker background for contrast */
             --spidey-accent-yellow: #fbc02d; /* For highlights, like eyes or special glows */
-            --web-color-subtle: rgba(255, 255, 255, 0.04); /* Very subtle web lines */
+            --web-color-subtle: rgba(255, 255, 255, 0.03); /* Very subtle web lines */
             --text-color: #e0e0e0; /* Light grey for general text */
+        }
+
+        /* --- Global Reset for Outlines --- */
+        *:focus {
+            outline: none !important; /* Remove all default browser outlines */
+            box-shadow: 0 0 0 2px var(--spidey-accent-yellow), 0 0 0 4px var(--spidey-blue) !important; /* Custom focus ring */
+            transition: box-shadow 0.2s ease-in-out;
         }
 
         body {
@@ -64,7 +71,7 @@
             align-items: center;
             background-color: var(--spidey-dark-bg);
             padding: 5px;
-            cursor: move;
+            cursor: grab; /* More indicative cursor */
         }
         .drag-handle {
             flex-grow: 1;
@@ -72,7 +79,6 @@
             color: var(--spidey-accent-yellow); /* Yellow for drag handle */
             font-size: 20px;
             font-weight: 900;
-            box-shadow: none; /* No extra shadow here, use text-shadow below */
             padding: 0 15px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
         }
@@ -84,7 +90,6 @@
             font-size: 20px;
             font-weight: 900;
             line-height: 30px;
-            box-shadow: none; /* No extra shadow here, use text-shadow below */
             padding: 0 20px;
             text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
         }
@@ -253,6 +258,7 @@
             transition: color 0.3s ease, transform 0.3s ease;
             padding: 8px 15px;
             border-radius: 5px;
+            outline: none; /* Ensure no outline */
         }
 
         .nav-links li a:hover {
@@ -264,26 +270,26 @@
         /* Main Content Enhancements */
         #appContent {
             position: relative;
-            border: 3px solid transparent;
-            border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue)) 1;
+            border: 3px solid transparent; /* Changed from border-image to solid for custom animation */
             border-radius: 15px;
             padding: 20px;
-            margin-top: 50px; /* Ensure space from header */
+            margin-top: 50px;
             box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
             animation: contentBorderGlow 4s infinite alternate;
+            background-color: rgba(18, 18, 18, 0.8); /* Slightly transparent background for content */
         }
 
         @keyframes contentBorderGlow {
             0% {
-                border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue)) 1;
+                border-color: var(--spidey-red);
                 box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
             }
             50% {
-                border-image: linear-gradient(45deg, var(--spidey-blue), var(--spidey-red)) 1;
+                border-color: var(--spidey-blue);
                 box-shadow: 0 0 45px rgba(var(--spidey-blue), 0.7), 0 0 20px rgba(var(--spidey-red), 0.7);
             }
             100% {
-                border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue)) 1;
+                border-color: var(--spidey-red);
                 box-shadow: 0 0 30px rgba(var(--spidey-red), 0.5), 0 0 15px rgba(var(--spidey-blue), 0.5);
             }
         }
@@ -307,49 +313,49 @@
         /* Card Styling */
         .card-container .MuiBox-root,
         .social-media-cards .card {
-            /* Updated background with stronger gradient and subtle web pattern */
             background:
-                linear-gradient(135deg, var(--spidey-blue) 0%, var(--spidey-red) 100%),
+                linear-gradient(135deg, var(--spidey-dark-bg) 0%, rgba(39, 117, 202, 0.2) 50%, rgba(211, 47, 47, 0.2) 100%),
                 url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="web-card-pattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M-5,15 l10,-10 M-5,15 l10,10 M15,5 l-10,10 M15,5 l10,-10 M15,-5 l10,10 M-10,15 l10,-10 M15,35 l10,-10" stroke="rgba(255,255,255,0.08)" stroke-width="0.8" stroke-linecap="square"></path></pattern></defs><rect width="100%" height="100%" fill="url(%23web-card-pattern)"></rect></svg>');
-            background-blend-mode: overlay; /* Blend the gradient and pattern */
-            border: 3px solid transparent; /* Prepare for border-image */
-            border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue), var(--spidey-red)) 1; /* Animated border */
-            border-radius: 15px; /* Slightly more rounded corners */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6); /* Stronger initial shadow */
+            background-blend-mode: overlay;
+            border: 3px solid transparent; /* Default to transparent, use pulsing border */
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
             transition: all 0.4s ease-in-out;
             position: relative;
-            overflow: hidden; /* To contain pseudo-elements like glow */
-            animation: cardBorderPulse 4s infinite alternate, fadeInUp 1s ease-out forwards; /* Initial entrance and pulsing border */
+            overflow: hidden;
+            animation: cardBorderPulse 4s infinite alternate, fadeInUp 1s ease-out forwards;
         }
 
         @keyframes cardBorderPulse {
-            0% { border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue)) 1; }
-            50% { border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-accent-yellow)) 1; }
-            100% { border-image: linear-gradient(45deg, var(--spidey-accent-yellow), var(--spidey-blue)) 1; }
+            0% { border-color: var(--spidey-accent-yellow); }
+            25% { border-color: var(--spidey-blue); }
+            50% { border-color: var(--spidey-red); }
+            75% { border-color: var(--spidey-blue); }
+            100% { border-color: var(--spidey-accent-yellow); }
         }
 
         .card-container .MuiBox-root:hover,
         .social-media-cards .card:hover {
-            transform: translateY(-10px) scale(1.03); /* More pronounced lift and scale */
+            transform: translateY(-10px) scale(1.03);
             box-shadow:
-                0 20px 50px rgba(211, 47, 47, 0.8), /* Stronger red glow */
-                0 0 40px rgba(39, 117, 202, 0.8), /* Stronger blue glow */
-                0 0 60px rgba(251, 192, 45, 0.5); /* Accent yellow glow */
-            border-image: linear-gradient(45deg, var(--spidey-red), var(--spidey-blue), var(--spidey-accent-yellow)) 1;
+                0 20px 50px rgba(211, 47, 47, 0.8),
+                0 0 40px rgba(39, 117, 202, 0.8),
+                0 0 60px rgba(251, 192, 45, 0.5);
+            border-color: white; /* Make border white on hover for a striking effect */
         }
 
         /* "Code KCAZ" and Arrows */
         .code-container .code {
             font-family: 'Bangers', cursive;
             color: var(--spidey-accent-yellow);
-            font-size: clamp(28px, 6vw, 40px) !important; /* Larger and responsive font size */
+            font-size: clamp(28px, 6vw, 40px) !important;
             text-shadow:
                 2px 2px 0px var(--spidey-red),
                 4px 4px 0px var(--spidey-blue),
                 6px 6px 3px rgba(0, 0, 0, 0.7);
             letter-spacing: 3px;
             transition: all 0.3s ease-in-out;
-            display: inline-block; /* Required for transform */
+            display: inline-block;
         }
 
         .code-container .code:hover {
@@ -378,15 +384,16 @@
             color: white;
             font-weight: bold;
             text-transform: uppercase;
-            font-family: 'Bangers', cursive; /* Apply Bangers font */
+            font-family: 'Bangers', cursive;
             letter-spacing: 1px;
-            border-radius: 10px; /* Slightly more rounded */
-            border: 3px solid var(--spidey-accent-yellow); /* Stronger border */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5); /* Stronger initial shadow */
-            transition: all 0.4s ease-in-out, background 0.8s ease; /* Longer background transition */
+            border-radius: 10px;
+            border: 3px solid var(--spidey-accent-yellow);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease-in-out, background 0.8s ease;
             position: relative;
             overflow: hidden;
-            z-index: 1; /* For pseudo-element stacking */
+            z-index: 1;
+            outline: none; /* Ensure no outline on buttons */
         }
 
         /* Light sweep effect on buttons */
@@ -394,68 +401,69 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -150%; /* Start further left */
-            width: 200%; /* Wider sweep */
+            left: -150%;
+            width: 200%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); /* Brighter sweep */
-            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smoother and slightly faster */
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
             transform: skewX(-20deg);
-            z-index: -1; /* Behind button text */
+            z-index: -1;
         }
 
         .MuiButton-containedPrimary.signup-button:hover:before {
-            left: 150%; /* Sweep further right */
+            left: 150%;
         }
 
         .MuiButton-containedPrimary.signup-button:hover {
             background: linear-gradient(90deg, var(--spidey-blue) 0%, var(--spidey-accent-yellow) 50%, var(--spidey-red) 100%);
-            transform: translateY(-5px) scale(1.02); /* More pronounced lift */
+            transform: translateY(-5px) scale(1.02);
             box-shadow:
                 0 10px 25px rgba(211, 47, 47, 0.7),
                 0 0 20px rgba(39, 117, 202, 0.7),
-                0 0 30px rgba(251, 192, 45, 0.4); /* Multi-color shadow on hover */
+                0 0 30px rgba(251, 192, 45, 0.4);
             border-color: white; /* Border color changes on hover */
         }
 
         /* For the $600 display (price-wrapper.glow) */
         .toggle-images .label .price-wrapper.glow {
             font-family: 'Bangers', cursive;
-            font-size: clamp(2.5em, 8vw, 6em); /* Responsive font size */
+            font-size: clamp(3em, 10vw, 7em); /* Even larger and more responsive */
             color: var(--spidey-accent-yellow);
             text-shadow:
-                4px 4px 0px var(--spidey-red),
-                8px 8px 0px var(--spidey-blue),
-                12px 12px 5px rgba(0, 0, 0, 0.7); /* Layered shadows */
-            animation: spideyTextPulse 2s infinite alternate ease-in-out, textEntrance 1s forwards; /* New animations */
-            transform: scale(1); /* Initial state for animation */
-            display: inline-block; /* Required for transform on inline elements */
-            letter-spacing: 2px;
-            line-height: 1; /* Adjust line height if needed */
+                5px 5px 0px var(--spidey-red),
+                10px 10px 0px var(--spidey-blue),
+                15px 15px 8px rgba(0, 0, 0, 0.8); /* More impactful layered shadows */
+            animation: spideyTextPulse 2s infinite alternate ease-in-out, textEntrance 1s forwards;
+            transform: scale(1);
+            display: inline-block;
+            letter-spacing: 3px; /* Slightly wider spacing */
+            line-height: 1;
+            white-space: nowrap; /* Prevent breaking if space is tight */
         }
 
         @keyframes spideyTextPulse {
             0% {
-                text-shadow: 4px 4px 0px var(--spidey-red), 8px 8px 0px var(--spidey-blue), 12px 12px 5px rgba(0, 0, 0, 0.7);
+                text-shadow: 5px 5px 0px var(--spidey-red), 10px 10px 0px var(--spidey-blue), 15px 15px 8px rgba(0, 0, 0, 0.8);
                 transform: scale(1);
             }
             50% {
-                text-shadow: 6px 6px 0px var(--spidey-blue), 12px 12px 0px var(--spidey-red), 18px 18px 8px rgba(0, 0, 0, 0.9);
+                text-shadow: 7px 7px 0px var(--spidey-blue), 14px 14px 0px var(--spidey-red), 21px 21px 10px rgba(0, 0, 0, 0.9);
                 transform: scale(1.05);
             }
             100% {
-                text-shadow: 4px 4px 0px var(--spidey-red), 8px 8px 0px var(--spidey-blue), 12px 12px 5px rgba(0, 0, 0, 0.7);
+                text-shadow: 5px 5px 0px var(--spidey-red), 10px 10px 0px var(--spidey-blue), 15px 15px 8px rgba(0, 0, 0, 0.8);
                 transform: scale(1);
             }
         }
 
         @keyframes textEntrance {
-            from { opacity: 0; transform: translateY(20px) scale(0.8); }
+            from { opacity: 0; transform: translateY(30px) scale(0.7); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Footer styling */
         .inner-footer {
-            background: linear-gradient(90deg, rgba(39, 117, 202, 0.1) 0%, rgba(211, 47, 47, 0.1) 100%);
+            background: linear-gradient(90deg, rgba(39, 117, 202, 0.15) 0%, rgba(211, 47, 47, 0.15) 100%); /* Slightly stronger footer background */
             border-top: 2px solid var(--spidey-blue);
             padding-top: 30px;
             margin-top: 50px;
@@ -491,12 +499,9 @@
 
         /* Ensure existing styles are respected or overridden properly */
         .toggle-images .label .price-wrapper.glow {
-             animation: spideyGlow 3s infinite alternate; /* Keep existing glow animation */
+             animation: spideyGlow 3s infinite alternate, spideyTextPulse 2s infinite alternate ease-in-out; /* Combined animations */
         }
-        @keyframes spideyGlow {
-            from { box-shadow: 0 0 20px var(--spidey-blue); }
-            to { box-shadow: 0 0 20px var(--spidey-red); }
-        }
+        /* Removed redundant spideyGlow from .price-wrapper.glow, as spideyTextPulse handles text-shadow effectively. */
     </style>
     <!-- SPIDER-MAN THEME STYLES END -->
 
