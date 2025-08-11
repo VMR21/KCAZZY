@@ -183,26 +183,43 @@
             background-repeat: repeat;
         }
 header {
-    background: linear-gradient(90deg, rgba(39, 117, 202, 0.2) 0%, rgba(211, 47, 47, 0.2) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba(39, 117, 202, 0.25) 0%,
+        rgba(211, 47, 47, 0.25) 100%
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Mobile view adjustments */
 @media screen and (max-width: 768px) {
     header {
+        background: linear-gradient(
+            90deg,
+            rgba(39, 117, 202, 0.28) 0%,
+            rgba(211, 47, 47, 0.28) 100%
+        );
         border-bottom: none;
     }
+
     .logo-title {
         position: relative;
         padding-bottom: 10px;
     }
+
     .logo-title::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 80%;
+        width: 72%;
         height: 2px;
         background-color: var(--spidey-red);
+        border-radius: 2px;
+        opacity: 0.9;
     }
 }
         .title {
