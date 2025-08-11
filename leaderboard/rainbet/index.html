@@ -30,60 +30,46 @@
             background-image: var(--spidey-web-pattern);
             background-repeat: repeat;
         }
-        header {
-            background: linear-gradient(90deg, rgba(39, 117, 202, 0.2) 0%, rgba(211, 47, 47, 0.2) 100%);
-            /* Removed border-bottom directly from header for consistency with home page */
-        }
-        .title {
-            font-family: 'Bangers', cursive;
-            color: var(--spidey-red) !important;
-            text-shadow: 2px 2px 5px var(--spidey-blue);
-            transition: all 0.3s ease;
-        }
-        .title:hover {
-            transform: scale(1.05);
-            text-shadow: 4px 4px 10px var(--spidey-blue);
-        }
-        .glow {
-            animation: spideyGlow 3s infinite alternate;
-        }
-        @keyframes spideyGlow {
-            from {
-                box-shadow: 0 0 20px rgba(39, 117, 202, 0.7);
-            }
-            to {
-                box-shadow: 0 0 20px rgba(211, 47, 47, 0.7);
-            }
-        }
-        .logo-title {
-            display: flex;
-            align-items: center;
-            position: relative; /* Needed for pseudo-element positioning */
-            padding-bottom: 10px; /* Space for the red line */
-        }
-        .logo-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%; /* Adjust the width of the red line */
-            height: 2px;
-            background-color: var(--spidey-red);
-        }
-        .spider-emblem {
-            height: 35px;
-            margin-left: 15px;
-            animation: spin 5s linear infinite;
-        }
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
+ header {
+    background: linear-gradient(
+        90deg,
+        rgba(39, 117, 202, 0.25) 0%,
+        rgba(211, 47, 47, 0.25) 100%
+    );
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile view adjustments */
+@media screen and (max-width: 768px) {
+    header {
+        background: linear-gradient(
+            90deg,
+            rgba(39, 117, 202, 0.28) 0%,
+            rgba(211, 47, 47, 0.28) 100%
+        );
+        border-bottom: none;
+    }
+
+    .logo-title {
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .logo-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 72%;
+        height: 2px;
+        background-color: var(--spidey-red);
+        border-radius: 2px;
+        opacity: 0.9;
+    }
+}
 
         /* Existing styles below */
         .warning-message {
