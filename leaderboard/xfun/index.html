@@ -388,22 +388,6 @@
                             </svg>
                             RULES
                         </button>
-<button id="prevLeaderboardBtn" class="prev-lb-btn" style="margin-left: 12px;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l2 2h5a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2z"></path>
-    </svg>
-    PREVIOUS LEADERBOARD
-</button>
-
-<button id="currentLeaderboardBtn" class="prev-lb-btn"
-    style="margin-left: 12px; display: none; background: #22c55e;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 12h18M3 6h18M3 18h18"></path>
-    </svg>
-    CURRENT LEADERBOARD
-</button>
                     </div>
                 </span>
 <div class="css-esk2ah">
@@ -598,7 +582,7 @@ async function loadLeaderboard() {
       card.innerHTML = `
         <img src="${roobetLogo}" style="width: 96px; height: auto; border-radius: 12px;">
         <div class="css-hca0vm"><span class="css-15a1lq3" style="font-weight:bold;">${username}</span></div>
-        <div class="css-7ahevu ejrykqo0"><span class="css-1vqddgv">Wagered: </span>
+        <div class="css-7ahevu ejrykqo0"><span class="css-1vqddgv">Deposited: </span>
           <span class="css-18icuxn"><div class="css-1y0ox2o"><span class="css-114dvlx">${wagered}</span></div></span>
         </div>
         <span class="css-v4675v"><div class="css-1y0ox2o"><span class="css-114dvlx glow">${reward}</span></div></span>
