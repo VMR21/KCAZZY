@@ -584,7 +584,7 @@ async function loadLeaderboard() {
 
   data.forEach((entry, index) => {
     const place = index + 1;
-    const reward = index < rewards.length ? `$ ${rewards[index]}` : '$ 0';
+    const reward = index < rewards.length ? `${rewards[index]} COINS` : '0 COINS';
     const wagered = `$ ${Number(entry.wagered).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     const username = entry.username;
 
